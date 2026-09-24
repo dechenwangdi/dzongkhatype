@@ -1,0 +1,28 @@
+node_modules/
+.pnpm-store/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+*.tsbuildinfo
+.DS_Store
+*.pem
+.agents/
+.codex/
+outputs/
+work/
+
+# Local tooling and operating-system files
+.vite/
+.cache/
+Thumbs.db
+Desktop.ini
+*.key
+*.p12
+*.pfx
+
+# Use the pinned pnpm lockfile as the dependency source of truth
+package-lock.json
+yarn.lock

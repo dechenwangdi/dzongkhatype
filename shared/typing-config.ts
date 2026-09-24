@@ -1,0 +1,1 @@
+export const TEST_DURATION_SECONDS = 60;

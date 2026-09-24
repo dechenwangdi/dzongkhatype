@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "../vendor/shadcn-tailwind-4.13.0.css";
+:root { --card-foreground:var(--foreground); --popover:var(--card); --popover-foreground:var(--foreground); --secondary-foreground:var(--foreground); --accent:var(--secondary); --accent-foreground:var(--foreground); --input:var(--border); --ring:var(--primary); --radius:.8rem; --pressed:#7ec699; --pressed-foreground:#17352f; --dzongkha-font:"Joyig","Noto Serif Tibetan","Noto Sans Tibetan","Microsoft Himalaya",serif; }
+/* Explicit root themes outrank the default regardless of stylesheet order. */
+:root, :root[data-theme="bhutan"] { color-scheme:light; --background:#faf2df; --foreground:#3b2922; --card:#fffaf0; --secondary:#f1dfbe; --muted:#ebd0a5; --muted-foreground:#725d4d; --primary:#944312; --primary-foreground:#ffffff; --destructive:#b02432; --correct:#24623e; --border:#ba9c73; }
+:root[data-theme="dark"] { color-scheme:dark; --background:#202224; --foreground:#e5e4db; --card:#242629; --secondary:#303236; --muted:#3b3d40; --muted-foreground:#a5a7aa; --primary:#e2b714; --primary-foreground:#202224; --destructive:#ff8995; --correct:#a8dfb8; --border:#55585e; }
+:root[data-theme="light"] { color-scheme:light; --background:#f5f3ed; --foreground:#252b30; --card:#ffffff; --secondary:#e8e5dc; --muted:#dedacf; --muted-foreground:#62666c; --primary:#785600; --primary-foreground:#ffffff; --destructive:#b32137; --correct:#176339; --border:#b3b4ac; }
+@theme inline { --color-background:var(--background); --color-foreground:var(--foreground); --color-card:var(--card); --color-card-foreground:var(--card-foreground); --color-primary:var(--primary); --color-primary-foreground:var(--primary-foreground); --color-secondary:var(--secondary); --color-secondary-foreground:var(--secondary-foreground); --color-muted:var(--muted); --color-muted-foreground:var(--muted-foreground); --color-accent:var(--accent); --color-accent-foreground:var(--accent-foreground); --color-border:var(--border); --color-input:var(--input); --color-ring:var(--ring); --font-sans:Arial,"Noto Sans Tibetan",sans-serif; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--background); color:var(--foreground); font-family:Arial,"Noto Sans Tibetan",sans-serif; }
+@font-face { font-family:"Joyig"; src:url('/fonts/ThinWangTJoyig-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+[data-font="tsuyig"] { --dzongkha-font:"DDC Uchen","Jomolhari","Noto Serif Tibetan","Microsoft Himalaya","Noto Sans Tibetan","Joyig",serif; }
+.font-dzongkha { font-family:var(--dzongkha-font); }
+.tool { display:inline-flex; align-items:center; gap:.45rem; border-radius:.5rem; padding:.55rem .8rem; color:var(--muted-foreground); font-size:.875rem; }
+.tool:hover { background:var(--secondary); color:var(--foreground); }
+.tool svg { width:1rem; height:1rem; }
+button { cursor:pointer; }
+button:disabled { cursor:default; opacity:.5; }
+:focus-visible { outline:2px solid var(--primary); outline-offset:3px; }
+@media (min-width:1024px) and (max-height:640px) { main { height:auto!important; overflow:auto!important; } main>section { height:auto!important; } }
+::selection { background:var(--primary); color:var(--primary-foreground); }
+@media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+
+.stats-dialog { margin:auto; width:min(94vw,680px); max-height:85dvh; overflow:auto; border:1px solid var(--border); border-radius:1rem; padding:1.25rem; background:var(--card); color:var(--foreground); }
+.stats-dialog::backdrop { background:#000b; }
