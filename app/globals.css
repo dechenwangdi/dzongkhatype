@@ -24,3 +24,19 @@ button:disabled { cursor:default; opacity:.5; }
 
 .stats-dialog { margin:auto; width:min(94vw,680px); max-height:85dvh; overflow:auto; border:1px solid var(--border); border-radius:1rem; padding:1.25rem; background:var(--card); color:var(--foreground); }
 .stats-dialog::backdrop { background:#000b; }
+
+
+/* Hands tint the keys instead of covering them: multiply keeps dark glyphs dark
+   on light themes; screen keeps light glyphs light on the dark theme. */
+.keyboard-hands { mix-blend-mode:multiply; }
+/* Finger colours: every key is tinted by the finger that types it (home keys strongest). */
+:root { --finger-mix:46%; --finger-home-mix:78%;
+  --f-left-pinky:#ec7fa3; --f-left-ring:#f39a4f; --f-left-middle:#efc72e; --f-left-index:#5fbf5b;
+  --f-right-index:#3fbccd; --f-right-middle:#5f93ee; --f-right-ring:#9b77e6; --f-right-pinky:#e8687b; --f-thumb:#aeb4bf; }
+/* Dark: deeper hues mixed into the dark card keep light glyphs readable. */
+:root[data-theme="dark"] { --finger-mix:40%; --finger-home-mix:66%;
+  --f-left-pinky:#d0567a; --f-left-ring:#d07a32; --f-left-middle:#c9a91f; --f-left-index:#4d9a4a;
+  --f-right-index:#2f9aaa; --f-right-middle:#4a74c9; --f-right-ring:#7b5bc4; --f-right-pinky:#c4505f; --f-thumb:#6b7280; }
+:root[data-theme="dark"] .keyboard-hands { mix-blend-mode:screen; opacity:.6; }
+/* Keys the next finger is responsible for: a faint dashed outline. */
+.finger-zone { outline:1px dashed color-mix(in srgb,var(--primary) 55%,transparent); outline-offset:-3px; }

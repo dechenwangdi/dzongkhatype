@@ -24,6 +24,12 @@ The existing standard keyboard, both character layers, grapheme-aware highlighti
 - dzongkha_typing_theme: Bhutan (default), Light or Dark; saved choices are restored
 - dzongkha_typing_text_mode: Sequential (default) or Random
 - dzongkha_typing_font: Joyig (default) or Tsuyig
+- dzongkha_typing_sound: key sounds on (default) or off
+- dzongkha_typing_hands: finger guide hands shown (default) or hidden
+
+## Finger guide
+
+Every key on the on-screen keyboard is tinted by the finger that types it (app/finger-map.ts), with the home row strongest. Two semi-transparent hands (app/keyboard-hands.tsx) rest on the home row and Space; the finger for the next key reaches to it, and the finger that pressed a key flashes green when correct or red when wrong. The hands are measured from the rendered keys, so they fit every screen size, and Hide hands turns them off. Key sounds are synthesised in the browser (app/use-sound.ts), so they need no audio files and work offline.
 
 Progress saves on completion, restart, new text, difficulty changes, page exit and backgrounding. Repeated lifecycle saves update the same attempt. No writes occur on each keypress. Tests Completed and best scores use completed 60-second tests; averages include labeled unfinished attempts. Reset requires confirmation and preserves identity, theme and difficulty.
 
@@ -31,7 +37,19 @@ Progress stays on this browser/device. Clearing browser storage removes it. If s
 
 ## Feedback
 
-Optionally copy .env.example to .env.local and set VITE_FEEDBACK_ENDPOINT to a public HTTPS endpoint before starting Vite or building. The form reads import.meta.env.VITE_FEEDBACK_ENDPOINT and sends a JSON POST containing only { "message": "your feedback" }. It does not attach the anonymous ID, progress, cookies or a referrer. No endpoint means feedback submission is disabled with an explanatory message; practice still works.
+Optionally copy .env.example to .env.local and set VITE_FEEDBACK_ENDPOINT before starting Vite or building.
+
+### Google Forms (recommended)
+
+1. Create a Google Form with one Paragraph question (for example "Feedback"). In Settings, turn off "Restrict to users in your organisation" and do not collect email addresses, so visitors can submit without signing in.
+2. Open the form's ⋮ menu, choose Get pre-filled link, type any text into the question, choose Get link and copy it. It looks like https://docs.google.com/forms/d/e/FORM_ID/viewform?usp=pp_url&entry.123456789=test.
+3. Set VITE_FEEDBACK_ENDPOINT to that link (in .env.local, and as the repository's Actions variable for deployment).
+
+The app posts only the message to that form's formResponse address as the entry field; responses appear in the form's Responses tab or its linked Sheet. Google Forms does not allow the page to read its reply, so the app confirms once Google has received the request.
+
+### Other endpoints
+
+Any other value must be a public HTTPS endpoint. The form reads import.meta.env.VITE_FEEDBACK_ENDPOINT and sends a JSON POST containing only { "message": "your feedback" }. It does not attach the anonymous ID, progress, cookies or a referrer. No endpoint means feedback submission is disabled with an explanatory message; practice still works.
 
 The external endpoint must accept application/json, allow your site's origin through CORS, handle OPTIONS preflight and return a successful 2xx status on acceptance. It owns delivery, spam protection and storage. VITE_ variables are embedded in public JavaScript: never put secrets in them. Rebuild after changing the production endpoint.
 
